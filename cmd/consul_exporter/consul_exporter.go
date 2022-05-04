@@ -80,6 +80,8 @@ func main() {
 	level.Info(logger).Log("msg", "Starting consul_exporter", "version", version.Info())
 	level.Info(logger).Log("build_context", version.BuildContext())
 
+	// zhou:
+
 	exporter, err := exporter.New(opts, queryOptions, *kvPrefix, *kvFilter, *healthSummary, logger)
 	if err != nil {
 		level.Error(logger).Log("msg", "Error creating the exporter", "err", err)
@@ -92,6 +94,8 @@ func main() {
 		level.Error(logger).Log("msg", "Error marshaling query options", "err", err)
 		os.Exit(1)
 	}
+
+	// zhou:
 
 	http.Handle(*metricsPath,
 		promhttp.InstrumentMetricHandler(

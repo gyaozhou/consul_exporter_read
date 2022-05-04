@@ -4,3 +4,5 @@
 /consul_exporter
 *.tar.gz
 /vendor
+cscope.files
+cscope.out

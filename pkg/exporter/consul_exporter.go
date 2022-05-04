@@ -35,6 +35,8 @@ const (
 	namespace = "consul"
 )
 
+// zhou: predefine metric description.
+
 var (
 	up = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "up"),
@@ -115,6 +117,8 @@ type Exporter struct {
 	requestLimitChan chan struct{}
 }
 
+// zhou: options for connecting to Consul.
+
 // ConsulOpts configures options for connecting to Consul.
 type ConsulOpts struct {
 	URI          string
@@ -127,8 +131,11 @@ type ConsulOpts struct {
 	RequestLimit int
 }
 
+// zhou:
+
 // New returns an initialized Exporter.
 func New(opts ConsulOpts, queryOptions consul_api.QueryOptions, kvPrefix, kvFilter string, healthSummary bool, logger log.Logger) (*Exporter, error) {
+
 	uri := opts.URI
 	if !strings.Contains(uri, "://") {
 		uri = "http://" + uri
@@ -172,6 +179,8 @@ func New(opts ConsulOpts, queryOptions consul_api.QueryOptions, kvPrefix, kvFilt
 	if opts.RequestLimit > 0 {
 		requestLimitChan = make(chan struct{}, opts.RequestLimit)
 	}
+
+	// zhou:
 
 	// Init our exporter.
 	return &Exporter{
